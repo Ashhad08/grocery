@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 
 import '../../../configs/extensions.dart';
+import '../../../elements/phone_text_form_field.dart';
 
-class CreateShopView extends StatelessWidget {
-  const CreateShopView({super.key});
+class CreateOrEditShopView extends StatelessWidget {
+  const CreateOrEditShopView({super.key, this.isEdit = false});
+
+  final bool isEdit;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create your shop'),
+        title: isEdit
+            ? const Text('Edit your shop')
+            : const Text('Create your shop'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -37,36 +42,55 @@ class CreateShopView extends StatelessWidget {
                 ),
               ).space(height: 200, width: double.infinity),
               30.height,
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                keyboardType: TextInputType.name,
+                onTapOutside: (event) =>
+                    FocusManager.instance.primaryFocus?.unfocus(),
+                decoration: const InputDecoration(
                   hintText: 'Shop name',
                 ),
               ),
               25.height,
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                keyboardType: TextInputType.name,
+                onTapOutside: (event) =>
+                    FocusManager.instance.primaryFocus?.unfocus(),
+                decoration: const InputDecoration(
                   hintText: 'Shop manager name',
                 ),
               ),
               25.height,
-              const TextField(
-                decoration: InputDecoration(
-                  hintText: 'Shop phone number',
+              TextField(
+                keyboardType: TextInputType.streetAddress,
+                onTapOutside: (event) =>
+                    FocusManager.instance.primaryFocus?.unfocus(),
+                decoration: const InputDecoration(
+                  hintText: 'Shop address',
                 ),
               ),
               25.height,
-              const TextField(
-                decoration: InputDecoration(
+              PhoneNumberTextFormField(
+                hintText: 'Shop phone number',
+                isRequired: true,
+                onSaved: (phoneNumber) {},
+              ),
+              25.height,
+              TextField(
+                keyboardType: TextInputType.emailAddress,
+                onTapOutside: (event) =>
+                    FocusManager.instance.primaryFocus?.unfocus(),
+                decoration: const InputDecoration(
                   hintText: 'Shop email',
                 ),
               ),
               70.height,
               ElevatedButton(
                 onPressed: () {},
-                child: const Row(
+                child: Row(
                   children: [
-                    Expanded(child: Text('Create shop')),
-                    Icon(Icons.arrow_forward)
+                    Expanded(
+                        child: isEdit ? const Text('Save') : const Text('Create shop')),
+                    const Icon(Icons.arrow_forward)
                   ],
                 ),
               ).space(
