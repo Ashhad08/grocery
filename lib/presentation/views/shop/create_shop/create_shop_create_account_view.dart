@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../configs/extensions.dart';
 import '../../../navigation/navigation_helper.dart';
-import 'create_shop_view.dart';
+import 'create_or_edit_shop_view.dart';
 
 class CreateShopCreateAccountView extends StatelessWidget {
   const CreateShopCreateAccountView({super.key});
@@ -29,14 +29,20 @@ class CreateShopCreateAccountView extends StatelessWidget {
                   style: context.textTheme.bodyLarge,
                 ),
                 40.height,
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  keyboardType: TextInputType.name,
+                  onTapOutside: (event) =>
+                      FocusManager.instance.primaryFocus?.unfocus(),
+                  decoration: const InputDecoration(
                     hintText: 'Your name',
                   ),
                 ),
                 25.height,
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  keyboardType: TextInputType.emailAddress,
+                  onTapOutside: (event) =>
+                      FocusManager.instance.primaryFocus?.unfocus(),
+                  decoration: const InputDecoration(
                     hintText: 'Your email',
                   ),
                 ),
@@ -46,6 +52,8 @@ class CreateShopCreateAccountView extends StatelessWidget {
                     builder: (context, val, _) {
                       return TextField(
                         obscureText: !val,
+                        onTapOutside: (event) =>
+                            FocusManager.instance.primaryFocus?.unfocus(),
                         decoration: InputDecoration(
                           hintText: 'Your password',
                           suffixIcon: IconButton(
@@ -64,7 +72,7 @@ class CreateShopCreateAccountView extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     NavigationHelper.pushReplacement(
-                        context, const CreateShopView());
+                        context, const CreateOrEditShopView());
                   },
                   child: const Row(
                     children: [

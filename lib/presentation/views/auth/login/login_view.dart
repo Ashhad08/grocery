@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../configs/extensions.dart';
 import '../../../navigation/navigation_helper.dart';
+import '../../customer/bottom_bar/bottom_bar_view.dart';
 import '../signup/signup_view.dart';
 
 class LoginView extends StatelessWidget {
@@ -13,6 +14,7 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     final ValueNotifier<bool> isPasswordVisible = ValueNotifier(false);
     return Scaffold(
+      appBar: AppBar(),
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
@@ -33,8 +35,11 @@ class LoginView extends StatelessWidget {
                   style: context.textTheme.bodyMedium,
                 ),
                 40.height,
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  keyboardType: TextInputType.emailAddress,
+                  onTapOutside: (event) =>
+                      FocusManager.instance.primaryFocus?.unfocus(),
+                  decoration: const InputDecoration(
                     hintText: 'Your email',
                   ),
                 ),
@@ -44,6 +49,8 @@ class LoginView extends StatelessWidget {
                     builder: (context, val, _) {
                       return TextField(
                         obscureText: !val,
+                        onTapOutside: (event) =>
+                            FocusManager.instance.primaryFocus?.unfocus(),
                         decoration: InputDecoration(
                           hintText: 'Your password',
                           suffixIcon: IconButton(
@@ -60,7 +67,9 @@ class LoginView extends StatelessWidget {
                     }),
                 70.height,
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    NavigationHelper.push(context, BottomBarView());
+                  },
                   child: const Text('Login'),
                 ).space(
                   width: double.infinity,

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'presentation/views/customer/bottom_bar/bottom_bar_view.dart';
 
 import 'presentation/configs/colors.dart';
 import 'presentation/configs/theme.dart';
-import 'presentation/views/auth/login/login_view.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: AppColors().appColor,
-    statusBarBrightness: Brightness.light,
-    statusBarIconBrightness: Brightness.light
-  ));
+      statusBarColor: AppColors().appColor,
+      statusBarBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.light));
   runApp(const MyApp());
 }
 
@@ -25,7 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme(context),
       themeMode: ThemeMode.light,
-      home: const Scaffold(),
+      home: BottomBarView(),
     );
   }
 }

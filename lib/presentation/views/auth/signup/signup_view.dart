@@ -14,6 +14,7 @@ class SignupView extends StatelessWidget {
   Widget build(BuildContext context) {
     final ValueNotifier<bool> isPasswordVisible = ValueNotifier(false);
     return Scaffold(
+      appBar: AppBar(),
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
@@ -33,14 +34,20 @@ class SignupView extends StatelessWidget {
                   style: context.textTheme.bodyMedium,
                 ),
                 40.height,
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  keyboardType: TextInputType.name,
+                  onTapOutside: (event) =>
+                      FocusManager.instance.primaryFocus?.unfocus(),
+                  decoration: const InputDecoration(
                     hintText: 'Your name',
                   ),
                 ),
                 25.height,
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  keyboardType: TextInputType.emailAddress,
+                  onTapOutside: (event) =>
+                      FocusManager.instance.primaryFocus?.unfocus(),
+                  decoration: const InputDecoration(
                     hintText: 'Your email',
                   ),
                 ),
@@ -50,6 +57,8 @@ class SignupView extends StatelessWidget {
                     builder: (context, val, _) {
                       return TextField(
                         obscureText: !val,
+                        onTapOutside: (event) =>
+                            FocusManager.instance.primaryFocus?.unfocus(),
                         decoration: InputDecoration(
                           hintText: 'Your password',
                           suffixIcon: IconButton(
@@ -111,7 +120,8 @@ class SignupView extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      NavigationHelper.push(context, const CreateShopCreateAccountView());
+                      NavigationHelper.push(
+                          context, const CreateShopCreateAccountView());
                     },
                     child: const Text('Create my shop'),
                   ),
